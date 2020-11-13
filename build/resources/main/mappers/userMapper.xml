@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eat.dao.UserMapper">
+
+    <cache type="com.eat.util.RedisCache"></cache>
+
+    <insert id="addUser"  >
+        INSERT INTO user(openid, user_name, user_phone, user_img ,keyId,publicKeyStr,privateKeyStr)
+         VALUES (#{openid}, #{user_name}, #{user_phone}, #{user_img}, #{keyId}, #{publicKeyStr}, #{privateKeyStr})
+    </insert>
+
+
+    <resultMap id="UserMap" type="com.eat.entity.User">
+        <result column="openid" jdbcType="VARCHAR" property="openid"/>
+        <result column="user_name" jdbcType="VARCHAR" property="user_name"/>
+        <result column="user_phone" jdbcType="VARCHAR" property="user_phone"/>
+        <result column="user_img" jdbcType="VARCHAR" property="user_img"/>
+        <result column="keyId" jdbcType="VARCHAR" property="keyId"/>
+        <result column="publicKeyStr" jdbcType="VARCHAR" property="publicKeyStr"/>
+        <result column="privateKeyStr" jdbcType="VARCHAR" property="privateKeyStr"/>
+    </resultMap>
+
+    <select id="SelectUserByUser" resultType="com.eat.entity.User">
+        SELECT  * from  user where
+        <trim prefix="" suffix="" suffixOverrides="AND|OR" prefixOverrides="AND|OR">
+            <if test="openid != null">and  openid  = #{openid}</if>
+            <if test="user_name != null">and  user_name  = #{user_name}</if>
+            <if test="user_phone != null">and  user_phone  = #{user_phone}</if>
+        </trim>
+    </select>
+
+
+
+</mapper>
