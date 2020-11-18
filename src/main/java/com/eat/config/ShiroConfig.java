@@ -42,7 +42,7 @@ public class ShiroConfig {
     public MyRealm myShiroRealm() {
         MyRealm customRealm = new MyRealm();
         //自定义密码验证
-        customRealm.setCredentialsMatcher(myCredentialsMatcher());
+        //customRealm.setCredentialsMatcher(myCredentialsMatcher());
         return customRealm;
     }
 
@@ -59,7 +59,7 @@ public class ShiroConfig {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(myShiroRealm());
         //设置自定义的session管理器
-        securityManager.setSessionManager(sessionManager());
+        //securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
 
@@ -115,14 +115,14 @@ public class ShiroConfig {
      * 自定义的 shiro session 缓存管理器，用于跨域等情况下使用 token 进行验证，不依赖于sessionId
      * @return
      */
-    @Bean
+   /* @Bean
     public SessionManager sessionManager(){
         //将我们继承后重写的shiro session 注册
         MySession shiroSession = new MySession();
         //如果后续考虑多tomcat部署应用，可以使用shiro-redis开源插件来做session 的控制，或者nginx 的负载均衡
         shiroSession.setSessionDAO(new EnterpriseCacheSessionDAO());
         return shiroSession;
-    }
+    }*/
 
     /**
      * @Summary
@@ -135,11 +135,11 @@ public class ShiroConfig {
      * 但是同时需要在SecurityManager中设置
      * SecurityManager.setCredentialsMatcher(myCredentialsMatcher());
      */
-    @Bean
+   /* @Bean
     public MyCredentialsMatcher myCredentialsMatcher() {
         return new MyCredentialsMatcher();
     }
-
+*/
 
     /**
      * @Summary

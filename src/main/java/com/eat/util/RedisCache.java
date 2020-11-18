@@ -21,11 +21,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @Description TODO
  * @Author 王振鹏
  * @date 2020/11/13 21:55
+ * TODO   配置muybatis的二级缓存，使用redis进行二级缓存
  **/
 public class RedisCache implements Cache {
-
-
-
 
     private String id;
 

@@ -1,7 +1,7 @@
 package com.eat.config;
 
 import com.alibaba.fastjson.JSONObject;
-import com.eat.util.integer.JWT;
+import com.eat.util.interfaces.JWT;
 import com.eat.entity.User;
 import com.eat.service.UserService;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -42,7 +42,7 @@ public class MyCredentialsMatcher implements CredentialsMatcher {
         //System.out.println("token------------"+token.getPrincipal());
         //System.out.println(token.getCredentials());
         //System.out.println("info---------------------"+info);
-        User creatUser = JSONObject.parseObject(jwt.verifyTokenObject(token.getPrincipal().toString()).toString(),User.class);
+        /*User creatUser = JSONObject.parseObject(jwt.verifyTokenObject(token.getPrincipal().toString()).toString(),User.class);
         User user   = userService.SelectUserByUserName(creatUser.getUser_name());
         System.out.println(user.getUser_img());
         //System.out.println(user.toString());
@@ -57,7 +57,7 @@ public class MyCredentialsMatcher implements CredentialsMatcher {
         }else{
             System.out.println("账号或密码不正确");
             return  false;
-        }
+        }*/
         /*  UsernamePasswordToken utoken=(UsernamePasswordToken) token;
         //获得用户输入的密码:(可以采用加盐(salt)的方式去检验)
         String inPassword = new String(utoken.getPassword());
@@ -70,5 +70,6 @@ public class MyCredentialsMatcher implements CredentialsMatcher {
         //进行密码的比对
         boolean flag = Objects.equals(inPassword, dbPassword);
         return flag;*/
+        return false;
     }
 }

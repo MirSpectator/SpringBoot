@@ -1,6 +1,8 @@
 package com.eat.config;
 
+import com.alibaba.fastjson.JSONObject;
 import com.eat.entity.User;
+import com.eat.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -9,6 +11,7 @@ import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -22,6 +25,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class MyRealm extends AuthorizingRealm {
 
+
+    @Autowired
+    private UserService userService;
 
 
     /**
@@ -51,26 +57,21 @@ public class MyRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         System.out.println("进入到登录方法doGetAuthenticationInfo---------------------------");
         //校验token是否为空
-        if (StringUtils.isEmpty(token.getPrincipal().toString())) {
+       if (StringUtils.isEmpty(token.getPrincipal().toString())) {
             return null;
         }
-
+        //System.out.println(token.getCredentials());
+        User user = userService.SelectUserByUserName(token.getPrincipal().toString());
         //获取用户信息
-       /* User creatUser = JSONObject.parseObject(jwt.verifyTokenObject(token.getPrincipal().toString()).toString(),User.class);
-        User user   = userService.SelectUserByUserName(creatUser.getUser_name());
-        System.out.println(creatUser.toString());
-        System.out.println(user);
-        //System.out.println("getresult------------------------------");
-        //System.out.println(r.getResult());
-        System.out.println(user.getUser_name());
+        //System.out.println(user.toString());
         if(user==null){
             return  null;
-        }*/
+        }
 
             //这里验证authenticationToken和simpleAuthenticationInfo的信
             //SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user,"密码",getName());
-        System.out.println(token.getPrincipal().toString());
-        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(token.getPrincipal(), token.getCredentials(),getName());
+        //System.out.println(token.getPrincipal().toString());
+        SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(user,user.getUser_pwd(),getName());
             return simpleAuthenticationInfo;
 
     }

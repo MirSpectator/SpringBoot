@@ -24,12 +24,23 @@ public class User implements Serializable {
     private String keyId;
     private String publicKeyStr;
     private String privateKeyStr;
+    private String user_pwd;
 
     public User(){
 
     };
 
-    public User(String openid, String user_name, String user_phone, String user_img, String keyId, String publicKeyStr, String privateKeyStr) {
+    public User(String user_phone) {
+        this.user_phone = user_phone;
+    }
+
+    public User(String keyId, String publicKeyStr, String privateKeyStr) {
+        this.keyId = keyId;
+        this.publicKeyStr = publicKeyStr;
+        this.privateKeyStr = privateKeyStr;
+    }
+
+    public User(String openid, String user_name, String user_phone, String user_img, String keyId, String publicKeyStr, String privateKeyStr, String user_ped) {
         this.openid = openid;
         this.user_name = user_name;
         this.user_phone = user_phone;
@@ -37,12 +48,22 @@ public class User implements Serializable {
         this.keyId = keyId;
         this.publicKeyStr = publicKeyStr;
         this.privateKeyStr = privateKeyStr;
+        this.user_pwd = user_ped;
     }
 
     @Override
     public String toString() {
         return JSONObject.toJSONString(this);
     }
+
+    public String getUser_pwd() {
+        return user_pwd;
+    }
+
+    public void setUser_pwd(String user_ped) {
+        this.user_pwd = user_ped;
+    }
+
 
     public String getOpenid() {
         return openid;

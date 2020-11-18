@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
  * @Description TODO
  * @Author 王振鹏
  * @date 2020/10/29 23:47
+ * TODO 用于手动获取@Bean
  **/
 @Component // //注意:需要添加这个注解
 public class ApplicationContextUtils implements ApplicationContextAware {

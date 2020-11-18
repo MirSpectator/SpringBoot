@@ -29,6 +29,38 @@
         </trim>
     </select>
 
+    <update id="UpdateUserByPhone">
+         UPDATE eat.user
+         <set>
+             <if test="user_name!= null and user_name != '' ">
+                 user_name = #{user_name},
+             </if>
+             <if test="user_img!= null and user_img != '' ">
+                 user_img = #{user_img},
+             </if>
+             <if test="keyId!= null and keyId != '' ">
+                 keyId = #{keyId},
+             </if>
+             <if test="publicKeyStr!= null and publicKeyStr != '' ">
+                 publicKeyStr = #{publicKeyStr},
+             </if>
+             <if test="privateKeyStr!= null and privateKeyStr != '' ">
+                 privateKeyStr = #{privateKeyStr},
+             </if>
+             <if test="user_pwd!= null and user_pwd != '' ">
+                 user_pwd = #{user_pwd},
+             </if>
+         </set>
+        WHERE user_phone = #{user_phone}
+    </update>
+
+    <update id="UpdateUserPhone">
+        UPDATE eat.user
+        SET user_phone = #{old_Phone},
+        WHERE user_phone = #{new_phone}
+    </update>
+
+
 
 
 </mapper>

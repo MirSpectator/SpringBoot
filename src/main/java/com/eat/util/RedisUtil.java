@@ -1,7 +1,7 @@
 package com.eat.util;
 
+import com.eat.util.interfaces.Redis;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -18,9 +18,10 @@ import java.util.concurrent.TimeUnit;
  * @Description TODO
  * @Author 王振鹏
  * @date 2020/11/13 21:25
+ * TODO redis 的工具类，将redis的各个方法进行了封装
  **/
 @Component
-public class RedisUtil extends CacheProperties.Redis {
+public class RedisUtil implements Redis {
 
     @Autowired
 

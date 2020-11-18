@@ -1,9 +1,7 @@
 package com.eat.dao;
 
 import com.eat.entity.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -39,4 +37,28 @@ public interface UserMapper {
      * @Description 添加用户，注册功能
      */
     int addUser(User user);
+
+
+    /**
+     * @Summary
+     * @Param: [user]
+     * @Return: int
+     * @Author: TheRaging
+     * @Date: 2020/11/17 21:24
+     * @Description 修改用户的个人信息，以及登录加密信息和密码
+     */
+    int UpdateUserByPhone(User user);
+
+
+    /**
+     * @Summary
+     * @Param: [user]
+     * @Return: int
+     * @Author: TheRaging
+     * @Date: 2020/11/17 22:10
+     * @Description 修改用户手机号
+     */
+    int UpdateUserPhone(@Param("old_Phone")String  old_Phone,@Param("new_phone")String new_phone);
+
+
 }

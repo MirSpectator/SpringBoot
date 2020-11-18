@@ -2,7 +2,9 @@ package com.eat.util;
 
 
 
-import com.eat.util.integer.JWT;
+import com.eat.entity.User;
+import com.eat.service.UserService;
+import com.eat.util.interfaces.JWT;
 import org.jose4j.json.JsonUtil;
 import org.jose4j.jwk.RsaJsonWebKey;
 import org.jose4j.jwk.RsaJwkGenerator;
@@ -14,10 +16,11 @@ import org.jose4j.jwt.consumer.InvalidJwtException;
 import org.jose4j.jwt.consumer.JwtConsumer;
 import org.jose4j.jwt.consumer.JwtConsumerBuilder;
 import org.jose4j.lang.JoseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.security.PrivateKey;
-import java.security.SecureRandom;
+import java.security.PublicKey;
 import java.util.UUID;
 
 /**
@@ -30,18 +33,18 @@ import java.util.UUID;
  **/
 @Component
 public class JWTUtils implements JWT {
+
+    @Autowired
+    private UserService userService;
+
     /**
      * keyId,公钥,私钥 都是用 createKeyPair 方法生成
      */
-    private static String keyId = null;
-    private static String privateKeyStr = null;
-    private static String publicKeyStr = null;
-    public static long accessTokenExpirationTime = 60 * 60 * 24;
+
+    public  long accessTokenExpirationTime = 60 * 60 * 24;
 
     //jws创建token
-    public String createToken(Object account) {
-       //调用方法生成keyId,公钥,私钥
-        createKeyPair();
+    public String createToken(Object account,String keyId,String privateKeyStr) {
         try {
             //Payload
             JwtClaims claims = new JwtClaims();
@@ -72,7 +75,9 @@ public class JWTUtils implements JWT {
                 }
                 jwk.setKeyId(keyId); */
             //PrivateKey privateKey = jwk.getPrivateKey();
+            System.out.println("创建"+privateKeyStr);
             PrivateKey privateKey = new RsaJsonWebKey(JsonUtil.parseJson(privateKeyStr)).getPrivateKey();
+            System.out.println(privateKey);
             jws.setKey(privateKey);
 
             //get token
@@ -85,9 +90,8 @@ public class JWTUtils implements JWT {
     }
 
     //jws创建token
-    public String createToken(String account,String SUBJECT) {
+    public String createToken(String account,String SUBJECT,String keyId,String privateKeyStr) {
         //调用方法生成keyId,公钥,私钥
-        createKeyPair();
         try {
             //Payload
             JwtClaims claims = new JwtClaims();
@@ -131,9 +135,8 @@ public class JWTUtils implements JWT {
     }
 
     //jws创建token
-    public String createToken(String account,String SUBJECT,String AUDIENCE) {
+    public String createToken(String account,String SUBJECT,String AUDIENCE,String keyId,String privateKeyStr) {
         //调用方法生成keyId,公钥,私钥
-        createKeyPair();
         try {
             //Payload
             JwtClaims claims = new JwtClaims();
@@ -183,7 +186,7 @@ public class JWTUtils implements JWT {
      * @return 返回 用户账号
      * @throws JoseException
      */
-    public boolean verifyTokenBoolean(String token) {
+    public boolean verifyTokenBoolean(String token,String publicKeyStr) {
         try {
             JwtConsumer consumer = new JwtConsumerBuilder()
                     .setRequireExpirationTime()
@@ -227,7 +230,7 @@ public class JWTUtils implements JWT {
         return false;
     }
 
-    public Object verifyTokenObject(String token){
+    public Object verifyTokenObject(String token,String publicKeyStr){
         try {
             JwtConsumer consumer = new JwtConsumerBuilder()
                     .setRequireExpirationTime()
@@ -247,6 +250,7 @@ public class JWTUtils implements JWT {
                     //.setVerificationKey(jwk.getPublicKey())
                     .setVerificationKey(new RsaJsonWebKey(JsonUtil.parseJson(publicKeyStr)).getPublicKey())
                     .build();
+            System.out.println(publicKeyStr);
             //System.out.println("11111111111111111111111");
             JwtClaims claims = consumer.processToClaims(token);
             // System.out.println("~~~~~~~~~~~~~~~~~~~"+claims);
@@ -275,7 +279,7 @@ public class JWTUtils implements JWT {
     /**
      * 创建jwk keyId , 公钥 ，秘钥
      */
-    public static void createKeyPair(){
+    public User createKeyPair() {
         /**
          * UUID.randomUUID().toString()是javaJDK提供的一个自动生成主键的方法。
          * UUID(Universally Unique Identifier)全局唯一标识符,
@@ -291,10 +295,9 @@ public class JWTUtils implements JWT {
          * //六位UUID
          * //bf7c30
          */
-        keyId = UUID.randomUUID().toString().replaceAll("-", "");
+        String keyId = UUID.randomUUID().toString().replaceAll("-", "");
         RsaJsonWebKey jwk = null;
         try {
-            SecureRandom s = new SecureRandom();
             jwk = RsaJwkGenerator.generateJwk(2048);
         } catch (JoseException e) {
             e.printStackTrace();
@@ -302,25 +305,38 @@ public class JWTUtils implements JWT {
         jwk.setKeyId(keyId);
         //采用的签名算法 RS256
         jwk.setAlgorithm(AlgorithmIdentifiers.RSA_USING_SHA256);
-        publicKeyStr = jwk.toJson(RsaJsonWebKey.OutputControlLevel.PUBLIC_ONLY);
-        privateKeyStr = jwk.toJson(RsaJsonWebKey.OutputControlLevel.INCLUDE_PRIVATE);
-
-        //System.out.println("keyId="+keyId);
-       // System.out.println();
-       // System.out.println("公钥 publicKeyStr="+publicKey);
-       // System.out.println();
-       // System.out.println("私钥 privateKeyStr="+privateKey);
-
+        String publicKeyStr = jwk.toJson(RsaJsonWebKey.OutputControlLevel.PUBLIC_ONLY);
+        String privateKeyStr = jwk.toJson(RsaJsonWebKey.OutputControlLevel.INCLUDE_PRIVATE);
+       /* PrivateKey privateKeys = new RsaJsonWebKey(JsonUtil.parseJson(privateKeyStr)).getPrivateKey();
+        System.out.println("123");
+        System.out.println(privateKeys);
+        PrivateKey privateKey = jwk.getPrivateKey();
+        PublicKey publicKey = jwk.getPublicKey();
+        System.out.println("keyId="+keyId);
+        System.out.println();
+        System.out.println("公钥 publicKeyStr="+publicKey.toString());
+        System.out.println(publicKeyStr);
+        System.out.println();
+        System.out.println("私钥 privateKeyStr="+privateKey.toString());
+        System.out.println(privateKeyStr);*/
+        return  new User(keyId,publicKeyStr,privateKeyStr);
     }
-    /*public static void main(String[] args) {
-        JWTUtils s = new JWTUtils();
-        System.out.println("------------");
+  /*  public static void main(String[] args) throws JoseException {
+         *//* JWTUtils s = new JWTUtils();
+        s.createKeyPair();
+      System.out.println("------------");
         String a = s.createToken("你好啊，王振鹏");
         System.out.println(a);
         System.out.println("------------2");
         String b = s.verifyToken(a);
         System.out.println(b);
-        System.out.println("============================");
+        System.out.println("============================");*//*
+
+        JWTUtils s = new JWTUtils();
+        User user = s.createKeyPair();
+
+        PrivateKey privateKey = new RsaJsonWebKey(JsonUtil.parseJson(user.getPrivateKeyStr())).getPrivateKey();
+        System.out.println(privateKey);
         //System.out.println(s.verifyToken("eyJhbGciOiJSUzI1NiIsImtpZCI6ImZhNjc3ZDUyNWMwZTRlZTQ4NWE2MTU0MzkzNzc5NGFmIn0.eyJqdGkiOiJyc3A0UEEybFZRSUNEb1VEWlVXVU1BIiwiaWF0IjoxNjAzMjA5NzMzLCJleHAiOjE2MDMyOTYxMzMsIm5iZiI6MTYwMzIwOTY3Mywic3ViIjoiWU9VUl9TVUJKRUNUIiwiYXVkIjoiWU9VUl9BVURJRU5DRSIsImFjY291bnQiOiLkvaDlpb3llYrvvIznjovmjK_puY8ifQ.KueqUX6FeYJ-WNotAZh9nvyeb0xjLfYPNbmQR2CbJYaiOuBkeI65Fc53n_FDfJINY3NVUNIkBAb5M4zvzPdORIhsceI3nef0-vfuH6CC-9w1bZqtY9qZ42FUSDgBocZlsLZDFM5jLr2WR3gPCZg7urhdGZNwfkBhGB3gYvUbntOLcWBqpRSqtfVqMPXGSxGx671CaELCO58Bgxl5QSjWi-yhbjcUS9SV4oD248DKtIemBLFV5YhE7uEqxCIFlqXLcIVCTFuQmv9DEmZidSk0cDYuYAPMEc8cVSxZmvb8nZlRwfWgBsj-E-5v3F6ofY9BBxaPesQcLQ_onxZBZ3IS_w1"));
     }*/
 }
