@@ -27,28 +27,35 @@ public class MsgConst {
      */
     // TODO 数据传输错误
     public static final String CODE_CLASS_NOT_NULL = "1011";
-    public static final String MSG_CODE_CLASS_NOT_NULL = "传输的json不能为空";
+    public static final String MSG_CODE_CLASS_NOT_NULL = "传输的对象数据解析失败";
 
     // TODO 数据不全
-    public static final String CODE_VAR_NOT_NULL = "1011";
-    public static final String MSG_CODE_VAR_NOT_NULL = "传输的json不能为空";
+    public static final String CODE_VAR_NOT_NULL = "1012";
+    public static final String MSG_CODE_VAR_NOT_NULL = "传输的变量参数不能为空";
 
     // TODO sql运行失败
-    public static final String CODE_SQL_NOT_NULL = "1011";
+    public static final String CODE_SQL_NOT_NULL = "1013";
     public static final String MSG_CODE_SQL_NOT_NULL = "传输的json不能为空";
 
-    // TODO 身份校验错误
+    // TODO
     public static final String CODE_TOKEN_IS_INVALID = "0011";
-    public static final String MSG_CODE_TOKEN_IS_INVALID = "TOKEN状态校验失败";
+    public static final String MSG_CODE_TOKEN_IS_INVALID = "TOKEN不存在";
 
     // TODO 身份校验错误
     public static final String CODE_CREAT_TOKEN_IS_INVALID = "0012";
-    public static final String MSG_CODE_CREAT_TOKEN_IS_INVALID = "新建的TOKEN解析失败";
+    public static final String MSG_CODE_CREAT_TOKEN_IS_INVALID = "TOKEN生成失败";
 
+    // TODO
+    public static final String CODE_UPDATE_SQL_IS_INVALID = "2001";
+    public static final String MSG_CODE_UPDATE_SQL_IS_INVALID = "修改失败";
 
+    // TODO
+    public static final String CODE_DELETE_SQL_IS_INVALID = "2002";
+    public static final String MSG_CODE_DELETE_SQL_IS_INVALID = "删除失败";
 
-
-
+    // TODO  储存TOKEN的加密密钥到数据库失败
+    public static final String CODE_SQL_ADD_TOKEN_IS_INVALID = "2002";
+    public static final String MSG_CODE_SQL_ADD_TOKEN_IS_INVALID = "删除失败";
 
 
 
