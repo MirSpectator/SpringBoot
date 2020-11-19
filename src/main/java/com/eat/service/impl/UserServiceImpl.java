@@ -7,12 +7,11 @@ import com.eat.dao.UserMapper;
 import com.eat.entity.User;
 import com.eat.service.UserService;
 import com.eat.util.interfaces.JWT;
-import com.eat.vo.LoginVo;
+import com.eat.util.interfaces.Redis;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.jose4j.lang.JoseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,11 +34,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private JWT jwt;
 
+    @Autowired
+    private Redis redis;
+
     @Override
-    public RspMsg add() {
-        Subject subject = SecurityUtils.getSubject();
-       // User user = new User("a", "123", "123", "123","123","123","123");
-        //int s = this.userMapper.addUser(user);
+    public RspMsg CreateUser(User user) {
+      int s = this.userMapper.addUser(user);
+      if(s!=1){
+          return  RspMsg.createRspMsg(MsgConst.CODE_CREAT_USER_IS_INVALID, MsgConst.MSG_CODE_CREAT_USER_IS_INVALID);
+      }
         return RspMsg.Success();
     }
 
@@ -71,16 +74,23 @@ public class UserServiceImpl implements UserService {
         subject.login(usernamePasswordToken);
         User userSecret  = jwt.createKeyPair();
         System.out.println(userSecret.toString());
+        //TODO 生成TOKEN
         String token = jwt.createToken(loginao.getPhone(), userSecret.getKeyId(),userSecret.getPrivateKeyStr());
         if(token==null){
             return RspMsg.createRspMsg(MsgConst.CODE_CREAT_TOKEN_IS_INVALID,MsgConst.MSG_CODE_CREAT_TOKEN_IS_INVALID);
         }
+        //TODO 将加密信息储存到数据库
         userSecret.setUser_phone(loginao.getPhone());
         int count = userMapper.UpdateUserByPhone(userSecret);
         if(count != 1 ) {
             return RspMsg.createRspMsg(MsgConst.CODE_SQL_ADD_TOKEN_IS_INVALID, MsgConst.MSG_CODE_SQL_ADD_TOKEN_IS_INVALID);
         }
-        return RspMsg.Success(new LoginVo(token, userSecret.getPublicKeyStr()));
+        //TODO 将密钥缓存进
+        Boolean bol = redis.set(token, userSecret.getPublicKeyStr());
+        if(!bol){
+            return RspMsg.createRspMsg(MsgConst.CODE_REDIS_ADD_TOKEN_IS_INVALID, MsgConst.MSG_CODE_REDIS_ADD_TOKEN_IS_INVALID);
+        }
+        return RspMsg.Success(token);
     }
 
     @Override

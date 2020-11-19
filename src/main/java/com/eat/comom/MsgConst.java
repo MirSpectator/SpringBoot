@@ -55,7 +55,15 @@ public class MsgConst {
 
     // TODO  储存TOKEN的加密密钥到数据库失败
     public static final String CODE_SQL_ADD_TOKEN_IS_INVALID = "2002";
-    public static final String MSG_CODE_SQL_ADD_TOKEN_IS_INVALID = "删除失败";
+    public static final String MSG_CODE_SQL_ADD_TOKEN_IS_INVALID = "储存TOKEN信息失败";
+
+    // TODO  储存TOKEN的加密密钥到数据库失败
+    public static final String CODE_REDIS_ADD_TOKEN_IS_INVALID = "2002";
+    public static final String MSG_CODE_REDIS_ADD_TOKEN_IS_INVALID = "缓存失败";
+
+    // TODO  用户创建失败
+    public static final String CODE_CREAT_USER_IS_INVALID = "1002";
+    public static final String MSG_CODE_CREAT_USER_IS_INVALID = "用户创建失败";
 
 
 

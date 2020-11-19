@@ -3,6 +3,7 @@ package com.eat.util;
 import com.eat.util.interfaces.Redis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -24,9 +25,11 @@ import java.util.concurrent.TimeUnit;
 public class RedisUtil implements Redis {
 
     @Autowired
-
     private RedisTemplate<String, Object> redisTemplate;
 
+    public RedisUtil(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     // =============================common============================
 

@@ -15,7 +15,7 @@ import org.jose4j.lang.JoseException;
  **/
 public interface UserService {
     // TODO 注册的用户
-    RspMsg add();
+    RspMsg CreateUser(User user);
     // TODO 查询用户，验证密码 ，用过实体类
     RspMsg SelectUser(User user);
     // TODO 查询用户，通过用户的名称查询用户

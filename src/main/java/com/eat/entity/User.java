@@ -26,6 +26,8 @@ public class User implements Serializable {
     private String privateKeyStr;
     private String user_pwd;
 
+    private String code;
+
     public User(){
 
     };
@@ -54,6 +56,14 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return JSONObject.toJSONString(this);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getUser_pwd() {

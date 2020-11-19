@@ -1,6 +1,11 @@
 package com.eat.config;
 
 import com.alibaba.fastjson.JSON;
+import com.eat.util.ApplicationContextUtils;
+import com.eat.util.JWTUtils;
+import com.eat.util.RedisUtil;
+import com.eat.util.interfaces.JWT;
+import com.eat.util.interfaces.Redis;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -9,6 +14,9 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +36,9 @@ import java.io.IOException;
  * @date 2020/10/26 23:39
  **/
 public class MyFilter extends AuthenticatingFilter {
+
+
+
 
     /**
      * @Summar
@@ -78,17 +89,22 @@ public class MyFilter extends AuthenticatingFilter {
             //没有token的话 就去登录
             System.out.println("tojkren-----------"+token);
             return  false;
-        }else {
-            //有token的话 选哟解析验证token 验证通过的话就直接权限校验或者直接访问，如果校验不通过的话就拒绝登录
-            System.out.println("获取到了TOKEN-----------"+token);
-            return  true;
         }
-
-
-
-
-
-
+        //有token的话 选哟解析验证token 验证通过的话就直接权限校验或者直接访问，如果校验不通过的话就拒绝登录
+        System.out.println("获取到了TOKEN-----------"+token);
+        RedisUtil redis = new RedisUtil(getRedisTemplate());
+        String publicKeyStr = redis.get(token).toString();
+        if( publicKeyStr == null ){
+            return  false;
+        }
+        System.out.println(publicKeyStr);
+        JWTUtils jwt = new JWTUtils();
+        Boolean bol =  jwt.verifyTokenBoolean(token, publicKeyStr);
+        System.out.println(bol);
+        if(!bol){
+            return false;
+        }
+        return  true;
     }
 
     /**
@@ -169,6 +185,11 @@ public class MyFilter extends AuthenticatingFilter {
 
         return token;
     }
-
+    public RedisTemplate getRedisTemplate(){
+        RedisTemplate redisTemplate = (RedisTemplate) ApplicationContextUtils.getBean("redisTemplate");
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        return redisTemplate;
+    }
 
 }

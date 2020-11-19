@@ -51,18 +51,10 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/CreateUser",method = {RequestMethod.GET})
-    public  RspMsg CreateUser(User user){
-        RspMsg rspMsg = this.userService.add();
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(
-               "123",
-                "111"
-        );
-        subject.login(usernamePasswordToken);
-        System.out.println("插入数据结果:"+rspMsg.toString());
-        System.out.println("111111进来了");
-        return  rspMsg;
+    @RequestMapping(value = "/CreateUser",method = {RequestMethod.POST})
+    public  RspMsg CreateUser(@RequestBody User user){
+
+        return  this.userService.CreateUser(user);
     }
     @RequestMapping(value = "/two",method = {RequestMethod.GET})
     public  String two(){

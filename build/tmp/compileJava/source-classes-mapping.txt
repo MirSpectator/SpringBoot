@@ -1,21 +1,21 @@
-com/eat/dao/ShoppingTrolleyMapper.java
- com.eat.dao.ShoppingTrolleyMapper
-com/eat/config/RedisConfig.java
- com.eat.config.RedisConfig
+com/eat/config/MyRealm.java
+ com.eat.config.MyRealm
+com/eat/service/UserService.java
+ com.eat.service.UserService
 com/eat/dao/SlideShowMapper.java
  com.eat.dao.SlideShowMapper
 com/eat/config/ShiroConfig.java
  com.eat.config.ShiroConfig
 com/eat/util/JsonUtils.java
  com.eat.util.JsonUtils
-com/eat/config/MySessionManager.java
- com.eat.config.MySessionManager
+com/eat/service/impl/UserServiceImpl.java
+ com.eat.service.impl.UserServiceImpl
 com/eat/entity/User.java
  com.eat.entity.User
 com/eat/entity/Order.java
  com.eat.entity.Order
-com/eat/dao/CommodityMapper.java
- com.eat.dao.CommodityMapper
+com/eat/config/MyCredentialsMatcher.java
+ com.eat.config.MyCredentialsMatcher
 com/eat/dao/CommentMapper.java
  com.eat.dao.CommentMapper
 com/eat/service/SlideShowService.java
@@ -34,12 +34,10 @@ com/eat/entity/ShoppingTrolley.java
  com.eat.entity.ShoppingTrolley
 com/eat/dao/OrderMapper.java
  com.eat.dao.OrderMapper
-com/eat/vo/LoginVo.java
- com.eat.vo.LoginVo
 com/eat/config/MyFilter.java
  com.eat.config.MyFilter
-com/eat/util/ApplicationContextUtils.java
- com.eat.util.ApplicationContextUtils
+com/eat/util/JWTUtils.java
+ com.eat.util.JWTUtils
 com/eat/dao/UserMapper.java
  com.eat.dao.UserMapper
 com/eat/comom/RspMsg.java
@@ -54,21 +52,21 @@ com/eat/entity/Comment.java
  com.eat.entity.Comment
 com/eat/util/RedisCache.java
  com.eat.util.RedisCache
-com/eat/util/interfaces/Redis.java
- com.eat.util.interfaces.Redis
-com/eat/config/MySession.java
- com.eat.config.MySession
-com/eat/config/MyRealm.java
- com.eat.config.MyRealm
 com/eat/util/interfaces/JWT.java
  com.eat.util.interfaces.JWT
-com/eat/config/MyCredentialsMatcher.java
- com.eat.config.MyCredentialsMatcher
-com/eat/service/UserService.java
- com.eat.service.UserService
-com/eat/util/JWTUtils.java
- com.eat.util.JWTUtils
-com/eat/service/impl/UserServiceImpl.java
- com.eat.service.impl.UserServiceImpl
+com/eat/config/MySession.java
+ com.eat.config.MySession
+com/eat/util/ApplicationContextUtils.java
+ com.eat.util.ApplicationContextUtils
+com/eat/config/MySessionManager.java
+ com.eat.config.MySessionManager
+com/eat/dao/ShoppingTrolleyMapper.java
+ com.eat.dao.ShoppingTrolleyMapper
+com/eat/config/RedisConfig.java
+ com.eat.config.RedisConfig
+com/eat/dao/CommodityMapper.java
+ com.eat.dao.CommodityMapper
+com/eat/util/interfaces/Redis.java
+ com.eat.util.interfaces.Redis
 com/eat/controller/UserController.java
  com.eat.controller.UserController
