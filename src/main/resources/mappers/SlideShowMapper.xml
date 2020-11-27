@@ -10,6 +10,10 @@
     </insert>
 
     <delete id="deleteSildeShow">
-        DELETE from  sildeshow where slideshow_id = #{slideshow_id}
+        DELETE from  slideshow where slideshow_id = #{slideshow_id}
     </delete>
+
+    <select id="selectSildeShow" resultType="com.eat.entity.SlideShow">
+        select * from slideshow
+    </select>
 </mapper>

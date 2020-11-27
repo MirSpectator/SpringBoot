@@ -8,6 +8,8 @@ import com.eat.service.SlideShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @version V1.0
  * @Package com.eat.service.impl
@@ -33,6 +35,7 @@ public class SlideShowServiceImpl implements SlideShowService {
      */
     @Override
     public RspMsg addSildeShow(SlideShow slideShow) {
+        System.out.println(slideShow.toString());
         if(slideShow == null){
             return RspMsg.createRspMsg(MsgConst.CODE_CLASS_NOT_NULL, MsgConst.MSG_CODE_CLASS_NOT_NULL);
         }else if(slideShow.getSlideshow_img()==null){
@@ -55,17 +58,27 @@ public class SlideShowServiceImpl implements SlideShowService {
      * @Description 删除轮播图
      */
     @Override
-    public RspMsg deleteSildeShow(SlideShow slideShow) {
-        if(slideShow == null){
-            return RspMsg.createRspMsg(MsgConst.CODE_CLASS_NOT_NULL, MsgConst.MSG_CODE_CLASS_NOT_NULL);
-        }else if(slideShow.getSlideshow_img()==null){
-            return RspMsg.createRspMsg(MsgConst.CODE_VAR_NOT_NULL, MsgConst.MSG_CODE_VAR_NOT_NULL );
-        }else{
-            int count = slideShowMapper.deleteSildeShow(slideShow);
-            if(count!=1){
+    public RspMsg deleteSildeShow(int slideShow) {
+
+
+        int count = slideShowMapper.deleteSildeShow(slideShow);
+        if(count!=1){
                 return RspMsg.createRspMsg(MsgConst.CODE_SQL_NOT_NULL, MsgConst.MSG_CODE_SQL_NOT_NULL);
-            }
         }
         return RspMsg.Success();
+    }
+
+    /***
+     * @Summary
+     * @Param: []
+     * @Return: com.eat.comom.RspMsg
+     * @Author: TheRaging
+     * @Date: 2020/11/23 19:12
+     * @Description TODO 查询首页的轮播图
+     */
+    @Override
+    public RspMsg selectSildeShow() {
+        List<SlideShow> list = this.slideShowMapper.selectSildeShow();
+        return RspMsg.Success(list);
     }
 }

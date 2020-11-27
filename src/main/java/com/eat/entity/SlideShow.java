@@ -24,6 +24,9 @@ public class SlideShow implements Serializable {
         this.slideshow_src = slideshow_src;
     }
 
+    public SlideShow() {
+    }
+
     @Override
     public String toString() {
         return "SlideShow{" +

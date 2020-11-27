@@ -16,6 +16,9 @@ public interface SlideShowService {
     RspMsg addSildeShow(SlideShow slideShow);
 
     // TODO 删除首页轮播图
-    RspMsg deleteSildeShow(SlideShow slideShow);
+    RspMsg deleteSildeShow(int  slideShow);
+
+    // TODO 查询首页的轮播i图
+    RspMsg selectSildeShow();
 
 }

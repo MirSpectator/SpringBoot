@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * @version V1.0
  * @Package com.eat.entity
  * @ClassName commodity
- * @Description TODO
+ * @Description TODO  菜品表
  * @Author 王振鹏
  * @date 2020/10/16 22:35
  * TODO 商品表

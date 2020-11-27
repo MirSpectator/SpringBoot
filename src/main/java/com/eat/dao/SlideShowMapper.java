@@ -2,6 +2,8 @@ package com.eat.dao;
 
 import com.eat.entity.SlideShow;
 
+import java.util.List;
+
 /**
  * @version V1.0
  * @Package com.eat.dao
@@ -15,5 +17,8 @@ public interface SlideShowMapper {
     int addSildeShow(SlideShow slideShow);
 
     // TODO 删除首页的轮播图
-    int deleteSildeShow(SlideShow slideShow);
+    int deleteSildeShow(int slideShow);
+
+    // TODO 查询首页的轮播退
+    List<SlideShow> selectSildeShow();
 }

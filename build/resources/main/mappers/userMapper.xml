@@ -17,7 +17,7 @@
             <if test="privateKeyStr != null and privateKeyStr != ''">,privateKeyStr</if>
         </trim>
         <trim prefix="VALUES (" suffix=")" prefixOverrides="," suffixOverrides=",">
-            user_phone ,user_pwd
+            #{user_phone} ,#{user_pwd}
             <if test="openid != null and openid != ''">,#{openid}</if>
             <if test="user_name != null and user_name != ''">,#{user_name}</if>
             <if test="user_img != null and user_img != ''">,#{user_img}</if>
