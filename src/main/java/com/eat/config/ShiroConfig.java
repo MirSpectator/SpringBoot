@@ -83,6 +83,8 @@ public class ShiroConfig {
         Map<String, String> map = new HashMap<>();
         //登录
         map.put("/test/login", "anon");
+        //注册
+        map.put("/test/CreateUser", "anon");
         //登出
         map.put("/logout", "logout");
         //登录失败跳转的页面

@@ -47,7 +47,7 @@ public class CommodityController {
      * @Date: 2020/11/28 0:34
      * @Description TODO
      */
-    @RequestMapping(value = "addCommodity.po",method = {RequestMethod.GET})
+    @RequestMapping(value = "addCommodity.po",method = {RequestMethod.POST})
     public RspMsg addCommodity(@RequestBody Commodity commodity){
         return  this.commodityService.addCommodity(commodity);
     }
@@ -60,7 +60,7 @@ public class CommodityController {
      * @Date: 2020/11/28 0:33
      * @Description TODO
      */
-    @RequestMapping(value = "updateCommodity.po",method = {RequestMethod.GET})
+    @RequestMapping(value = "updateCommodity.po",method = {RequestMethod.POST})
     public RspMsg updateCommodity(@RequestBody Commodity commodity){
         return  this.commodityService.updateCommodity(commodity);
     }

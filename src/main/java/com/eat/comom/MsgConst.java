@@ -45,13 +45,17 @@ public class MsgConst {
     public static final String CODE_CREAT_TOKEN_IS_INVALID = "0012";
     public static final String MSG_CODE_CREAT_TOKEN_IS_INVALID = "TOKEN生成失败";
 
-    // TODO
+    // TODO 修改信息失败
     public static final String CODE_UPDATE_SQL_IS_INVALID = "2001";
     public static final String MSG_CODE_UPDATE_SQL_IS_INVALID = "修改失败";
 
-    // TODO
+    // TODO 删除信息失败
     public static final String CODE_DELETE_SQL_IS_INVALID = "2002";
     public static final String MSG_CODE_DELETE_SQL_IS_INVALID = "删除失败";
+
+    // TODO 添加信息失败
+    public static final String CODE_ADD_SQL_IS_INVALID = "2003";
+    public static final String MSG_CODE_ADD_SQL_IS_INVALID = "添加失败";
 
     // TODO  储存TOKEN的加密密钥到数据库失败
     public static final String CODE_SQL_ADD_TOKEN_IS_INVALID = "2002";

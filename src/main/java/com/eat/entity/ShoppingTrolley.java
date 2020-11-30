@@ -14,21 +14,21 @@ import java.io.Serializable;
 public class ShoppingTrolley implements Serializable {
     private static final long serialVersionUID = 1787675672646625443L;
     private Integer shopping_Trolley_id;
-    private String openid;
+    private Integer user_id;
     private String commodity;
 
     @Override
     public String toString() {
         return "shopping_trolley{" +
                 "shopping_Trolley_id=" + shopping_Trolley_id +
-                ", openid='" + openid + '\'' +
+                ", user_id='" + user_id + '\'' +
                 ", commodity='" + commodity + '\'' +
                 '}';
     }
 
-    public ShoppingTrolley(Integer shopping_Trolley_id, String openid, String commodity) {
+    public ShoppingTrolley(Integer shopping_Trolley_id, Integer user_id, String commodity) {
         this.shopping_Trolley_id = shopping_Trolley_id;
-        this.openid = openid;
+        this.user_id = user_id;
         this.commodity = commodity;
     }
 
@@ -40,12 +40,12 @@ public class ShoppingTrolley implements Serializable {
         this.shopping_Trolley_id = shopping_Trolley_id;
     }
 
-    public String getOpenid() {
-        return openid;
+    public Integer getuser_id() {
+        return user_id;
     }
 
-    public void setOpenid(String openid) {
-        this.openid = openid;
+    public void setuser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public String getCommodity() {

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.eat.entity.Commodity">
+<mapper namespace="com.eat.dao.CommodityMapper">
+    <cache type="com.eat.util.RedisCache"></cache>
+
        <!--查询商品菜单-->
        <select id="selectCommodity" resultType="com.eat.entity.Commodity">
          select  * from commodity
@@ -18,8 +20,8 @@
          UPDATE eat.commodity
          <set>
              <trim prefixOverrides="," prefix="" suffixOverrides="," suffix="">
-                 <if test="commodity_imgcommodity_img!= null and commodity_imgcommodity_img != '' ">
-                     commodity_imgcommodity_img = #{commodity_imgcommodity_img},
+                 <if test="commodity_img!= null and commodity_img != '' ">
+                     commodity_img = #{commodity_img},
                  </if>
                  <if test="commodity_title!= null and commodity_title != '' ">
                      commodity_title = #{commodity_title},

@@ -9,7 +9,7 @@
         INSERT INTO user
         <trim prefix="(" suffix=")" prefixOverrides="," suffixOverrides=",">
             user_phone ,user_pwd
-            <if test="openid != null and openid != ''">,openid</if>
+            <if test="id != null and id != ''">,id</if>
             <if test="user_name != null and user_name != ''">,user_name</if>
             <if test="user_img != null and user_img != ''">,user_img</if>
             <if test="keyId != null and keyId != ''">,keyId</if>
@@ -18,7 +18,7 @@
         </trim>
         <trim prefix="VALUES (" suffix=")" prefixOverrides="," suffixOverrides=",">
             #{user_phone} ,#{user_pwd}
-            <if test="openid != null and openid != ''">,#{openid}</if>
+            <if test="id != null and id != ''">,#{id}</if>
             <if test="user_name != null and user_name != ''">,#{user_name}</if>
             <if test="user_img != null and user_img != ''">,#{user_img}</if>
             <if test="keyId != null and keyId != ''">,#{keyId}</if>
@@ -32,7 +32,7 @@
     <select id="SelectUserByUser" resultType="com.eat.entity.User">
         SELECT  * from  user where
         <trim prefix="" suffix="" suffixOverrides="AND|OR" prefixOverrides="AND|OR">
-            <if test="openid != null and openid != ''">and  openid  = #{openid}</if>
+            <if test="id != null and id != ''">and  id  = #{id}</if>
             <if test="user_name != null and user_name != ''">and  user_name  = #{user_name}</if>
             <if test="user_phone != null and user_phone != ''">and  user_phone  = #{user_phone}</if>
         </trim>

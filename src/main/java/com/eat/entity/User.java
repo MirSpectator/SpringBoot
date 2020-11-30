@@ -17,7 +17,7 @@ import java.security.PublicKey;
  **/
 public class User implements Serializable {
     private static final long serialVersionUID = 8196270106098984046L;
-    private String openid;
+    private Integer id;
     private String user_name;
     private String user_phone;
     private String user_img;
@@ -42,8 +42,8 @@ public class User implements Serializable {
         this.privateKeyStr = privateKeyStr;
     }
 
-    public User(String openid, String user_name, String user_phone, String user_img, String keyId, String publicKeyStr, String privateKeyStr, String user_ped) {
-        this.openid = openid;
+    public User(Integer id, String user_name, String user_phone, String user_img, String keyId, String publicKeyStr, String privateKeyStr, String user_ped) {
+        this.id = id;
         this.user_name = user_name;
         this.user_phone = user_phone;
         this.user_img = user_img;
@@ -75,12 +75,12 @@ public class User implements Serializable {
     }
 
 
-    public String getOpenid() {
-        return openid;
+    public Integer getid() {
+        return id;
     }
 
-    public void setOpenid(String openid) {
-        this.openid = openid;
+    public void setid(Integer id) {
+        this.id = id;
     }
 
     public String getUser_name() {

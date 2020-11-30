@@ -60,10 +60,11 @@ public class MyRealm extends AuthorizingRealm {
        if (StringUtils.isEmpty(token.getPrincipal().toString())) {
             return null;
         }
-        //System.out.println(token.getCredentials());
+
+        System.out.println(token.getCredentials());
+        System.out.println(token.getPrincipal());
         User user = userService.SelectUserByUserName(token.getPrincipal().toString());
         //获取用户信息
-        //System.out.println(user.toString());
         if(user==null){
             return  null;
         }
@@ -97,12 +98,12 @@ public class MyRealm extends AuthorizingRealm {
      * @param principals 登录成功的凭证（user信息）
      * @return 从
      */
-    @Override
+   /* @Override
     protected Object getAuthorizationCacheKey(PrincipalCollection principals) {
         User userInfo = (User) principals.getPrimaryPrincipal();
         System.out.println("getAuthorizationCacheKey===============================================");
-        return userInfo.getOpenid();
-    }
+        return userInfo.getid();
+    }*/
 
 
 }

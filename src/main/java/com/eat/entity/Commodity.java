@@ -16,16 +16,18 @@ public class Commodity implements Serializable {
     private static final long serialVersionUID = 4159013755911067668L;
 
     private Integer commodity_id;
-    private String commodity_imgcommodity_img;
+    private String commodity_img;
     private String commodity_title;
     private BigDecimal commodity_price;
     private String commodity_introduce;
     private Boolean commodity_status;
 
+    public Commodity() {
+    }
 
-    public Commodity(Integer commodity_id, String commodity_imgcommodity_img, String commodity_title, BigDecimal commodity_price, String commodity_introduce, Boolean commodity_status) {
+    public Commodity(Integer commodity_id, String commodity_img, String commodity_title, BigDecimal commodity_price, String commodity_introduce, Boolean commodity_status) {
         this.commodity_id = commodity_id;
-        this.commodity_imgcommodity_img = commodity_imgcommodity_img;
+        this.commodity_img = commodity_img;
         this.commodity_title = commodity_title;
         this.commodity_price = commodity_price;
         this.commodity_introduce = commodity_introduce;
@@ -36,7 +38,7 @@ public class Commodity implements Serializable {
     public String toString() {
         return "commodity{" +
                 "commodity_id=" + commodity_id +
-                ", commodity_imgcommodity_img='" + commodity_imgcommodity_img + '\'' +
+                ", commodity_img='" + commodity_img + '\'' +
                 ", commodity_title='" + commodity_title + '\'' +
                 ", commodity_price=" + commodity_price +
                 ", commodity_introduce='" + commodity_introduce + '\'' +
@@ -56,12 +58,12 @@ public class Commodity implements Serializable {
         this.commodity_id = commodity_id;
     }
 
-    public String getCommodity_imgcommodity_img() {
-        return commodity_imgcommodity_img;
+    public String getCommodity_img() {
+        return commodity_img;
     }
 
-    public void setCommodity_imgcommodity_img(String commodity_imgcommodity_img) {
-        this.commodity_imgcommodity_img = commodity_imgcommodity_img;
+    public void setCommodity_img(String commodity_img) {
+        this.commodity_img = commodity_img;
     }
 
     public String getCommodity_title() {
@@ -88,8 +90,15 @@ public class Commodity implements Serializable {
         this.commodity_introduce = commodity_introduce;
     }
 
-    public Boolean getCommodity_status() {
-        return commodity_status;
+    //0下架 1上架
+    public Integer getCommodity_status() {
+        if(commodity_status==null){
+            return null;
+        }
+        if(commodity_status){
+           return 1;
+        }
+        return 0;
     }
 
     public void setCommodity_status(Boolean commodity_status) {
