@@ -12,6 +12,8 @@ com/eat/config/ShiroConfig.java
  com.eat.config.ShiroConfig
 com/eat/util/JsonUtils.java
  com.eat.util.JsonUtils
+com/eat/controller/SlideShowController.java
+ com.eat.controller.SlideShowController
 com/eat/service/impl/UserServiceImpl.java
  com.eat.service.impl.UserServiceImpl
 com/eat/entity/User.java
@@ -26,6 +28,8 @@ com/eat/dao/CommentMapper.java
  com.eat.dao.CommentMapper
 com/eat/util/RedisUtil.java
  com.eat.util.RedisUtil
+com/eat/comom/GlobalException.java
+ com.eat.comom.GlobalException
 com/eat/service/impl/SlideShowServiceImpl.java
  com.eat.service.impl.SlideShowServiceImpl
 com/eat/entity/Commodity.java
@@ -64,8 +68,8 @@ com/eat/DmApplication.java
  com.eat.DmApplication
 com/eat/entity/Comment.java
  com.eat.entity.Comment
-com/eat/controller/SlideShowController.java
- com.eat.controller.SlideShowController
+com/eat/controller/AddressController.java
+ com.eat.controller.AddressController
 com/eat/util/RedisCache.java
  com.eat.util.RedisCache
 com/eat/util/interfaces/JWT.java
@@ -86,5 +90,7 @@ com/eat/util/interfaces/Redis.java
  com.eat.util.interfaces.Redis
 com/eat/controller/UserController.java
  com.eat.controller.UserController
-com/eat/controller/AddressController.java
- com.eat.controller.AddressController
+com/eat/comom/GlobalExceptionHandler.java
+ com.eat.comom.GlobalExceptionHandler
+com/eat/aop/ControllerAspect.java
+ com.eat.aop.ControllerAspect

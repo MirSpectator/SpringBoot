@@ -1,6 +1,7 @@
 package com.eat.controller;
 
 import com.eat.ao.loginAo;
+import com.eat.comom.GlobalException;
 import com.eat.comom.RspMsg;
 
 import com.eat.util.interfaces.JWT;
@@ -9,13 +10,12 @@ import com.eat.service.UserService;
 
 
 import com.eat.util.interfaces.Redis;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
-import org.jose4j.lang.JoseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ResponseBody
 @RequestMapping("/test")
 public class UserController {
+
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -56,9 +58,10 @@ public class UserController {
 
         return  this.userService.CreateUser(user);
     }
-    @RequestMapping(value = "/two",method = {RequestMethod.GET})
+    @GetMapping(value = "/two")
     public  String two(){
-
+        log.info("123,日志输出成功");
+      // log.info("你好啊");
        /* redis.set("1", 123);
         System.out.println(redis.get("1"));
         User user = new User();
@@ -72,6 +75,7 @@ public class UserController {
        /*String token =  jwt.createToken("123");
         System.out.println(token);
        String accout = (String) jwt.verifyTokenObject(token);*/
-        return  "验证成功";
+        throw  new GlobalException("参数一场");
+
     }
 }

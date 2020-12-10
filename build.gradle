@@ -1,8 +1,27 @@
 
 
 plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'war'  //默认是jar包，添加此插件之后支持打war包
 }
+
+
+// war 包名称自定义
+bootWar {
+    archiveBaseName = 'aaa'    //不需要带后缀（会自带版本号：aaa-0.0.1-SNAPSHOT.war）
+//    archiveFileName ='bb.war'    //需要加后缀
+}
+
+
+// jar 包名称自定义
+bootJar {
+//    archiveBaseName = 'aaa'    //不需要带后缀（默认形式，会自带版本号：aaa-0.0.1-SNAPSHOT.jar ）
+    archiveFileName ='bb.jar'    //需要加后缀
+}
+
+
 
 group 'org.example'
 version '1.0-SNAPSHOT'
@@ -14,8 +33,13 @@ repositories {
         url "http://maven.aliyun.com/nexus/content/groups/public/"
     }
 }
-
 dependencies {
+    // lombok工具包
+    // providedCompile group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
+    // aop的jar
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: '2.4.0'
+    // https:// httpclient 网络工具包
+    compile group: 'org.wso2.apache.httpcomponents', name: 'httpclient', version: '4.3.1.wso2v1'
     // 阿里巴巴的json
     compile group: 'com.alibaba', name: 'fastjson', version: '1.2.75'
     // redis支持
